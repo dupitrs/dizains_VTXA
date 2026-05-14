@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vortexa — Brand Guidelines v1.0</title>
+<link rel="icon" type="image/png" href="assets/vortexa-logo-navy.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -72,7 +73,7 @@
     display: flex; justify-content: space-between; align-items: center;
   }
   .nav-logo { display: flex; align-items: center; gap: var(--s2); font-weight: 600; font-size: 16px; letter-spacing: -0.02em; }
-  .nav-mark { width: 12px; height: 12px; background: var(--navy); border-radius: 2px; transform: rotate(45deg); }
+  .nav-mark { width: 20px; height: 20px; object-fit: contain; }
   .nav-links { display: flex; gap: var(--s5); }
   .nav-links a { color: var(--slate); text-decoration: none; font-size: 13px; transition: color 0.15s; }
   .nav-links a:hover { color: var(--ink); }
@@ -113,10 +114,12 @@
     position: relative; overflow: hidden;
   }
   .hero::after {
-    content: ''; position: absolute; right: -120px; top: 80px;
-    width: 360px; height: 360px;
-    background: var(--navy); opacity: 0.04;
-    border-radius: var(--r-md); transform: rotate(45deg);
+    content: ''; position: absolute; right: -60px; top: 80px;
+    width: 420px; height: 420px;
+    background-image: url('assets/vortexa-logo-navy.png');
+    background-size: contain; background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.05;
   }
   .hero-inner { position: relative; z-index: 2; }
   .hero-eyebrow {
@@ -126,8 +129,9 @@
     display: flex; align-items: center; gap: var(--s3);
   }
   .hero-eyebrow::before {
-    content: ''; width: 10px; height: 10px;
-    background: var(--navy); border-radius: 2px; transform: rotate(45deg);
+    content: ''; width: 14px; height: 14px;
+    background-image: url('assets/vortexa-logo-navy.png');
+    background-size: contain; background-repeat: no-repeat;
   }
   .hero-title {
     font-size: 84px; font-weight: 500; letter-spacing: -0.045em;
@@ -181,6 +185,9 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
   }
   .logo-display.dark { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .logo-display.dark .logo-mark,
+  .logo-display.dark .logo-mark-only,
+  .logo-display.dark .logo-stacked .mark { filter: brightness(0) invert(1); }
   .logo-tag {
     position: absolute; top: var(--s4); left: var(--s4);
     font-family: 'Geist Mono', monospace; font-size: 10px;
@@ -191,26 +198,21 @@
 
   /* The actual logo lockups */
   .logo-primary {
-    display: flex; align-items: center; gap: var(--s3);
+    display: flex; align-items: center; gap: var(--s4);
     font-size: 56px; font-weight: 500; letter-spacing: -0.045em; line-height: 1;
   }
   .logo-mark {
-    width: 22px; height: 22px; background: var(--navy);
-    border-radius: 3px; transform: rotate(45deg);
+    width: 64px; height: 64px; object-fit: contain;
   }
-  .logo-display.dark .logo-mark { background: var(--white); }
 
   .logo-mark-only {
-    width: 80px; height: 80px; background: var(--navy);
-    border-radius: 10px; transform: rotate(45deg);
+    width: 120px; height: 120px; object-fit: contain;
   }
-  .logo-display.dark .logo-mark-only { background: var(--white); }
 
   .logo-stacked { text-align: center; }
   .logo-stacked .mark {
-    width: 36px; height: 36px; background: var(--navy);
-    border-radius: 5px; transform: rotate(45deg);
-    margin: 0 auto var(--s4);
+    width: 80px; height: 80px; object-fit: contain;
+    margin: 0 auto var(--s4); display: block;
   }
   .logo-stacked .text { font-size: 32px; font-weight: 500; letter-spacing: -0.04em; }
 
@@ -537,8 +539,7 @@
     font-weight: 600; font-size: 16px; letter-spacing: -0.02em;
   }
   .web-nav-logo .mark {
-    width: 14px; height: 14px; background: var(--navy);
-    border-radius: 2px; transform: rotate(45deg);
+    width: 20px; height: 20px; object-fit: contain;
   }
   .web-nav-links { display: flex; gap: var(--s5); }
   .web-nav-links a { color: var(--slate); text-decoration: none; font-size: 13px; }
@@ -659,10 +660,8 @@
     font-size: 13px; font-weight: 600; letter-spacing: -0.02em;
   }
   .social-foot .mark {
-    width: 10px; height: 10px; background: var(--navy);
-    border-radius: 2px; transform: rotate(45deg);
+    width: 16px; height: 16px; object-fit: contain;
   }
-  .social-canvas.dark .social-foot .mark, .social-canvas.navy .social-foot .mark { background: var(--white); }
   .social-meta {
     margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--mist);
     display: flex; justify-content: space-between;
@@ -729,10 +728,10 @@
     color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em;
   }
   .footer-mark {
-    width: 16px; height: 16px; background: var(--white);
-    border-radius: 2px; transform: rotate(45deg);
+    width: 24px; height: 24px; object-fit: contain;
     display: inline-block; margin-right: var(--s2);
     vertical-align: middle;
+    filter: brightness(0) invert(1);
   }
 
   /* ============================================================
@@ -762,7 +761,7 @@
      ============================================================ -->
 <nav class="nav-bar">
   <div class="nav-bar-inner">
-    <div class="nav-logo"><span class="nav-mark"></span>Vortexa</div>
+    <div class="nav-logo"><img class="nav-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">Vortexa</div>
     <div class="nav-links">
       <a href="#essence">Esence</a>
       <a href="#logo">Logo</a>
@@ -773,7 +772,7 @@
       <a href="#voice">Balss</a>
       <a href="#rules">Noteikumi</a>
     </div>
-    <div class="nav-version">v1.0 · 2026</div>
+    <div class="nav-version">v1.1 · 2026</div>
   </div>
 </nav>
 
@@ -847,23 +846,23 @@
     <div class="logo-grid">
       <div class="logo-display">
         <span class="logo-tag">Primary lockup — galvenais variants</span>
-        <div class="logo-primary"><span class="logo-mark"></span>Vortexa</div>
+        <div class="logo-primary"><img class="logo-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">Vortexa</div>
       </div>
       <div class="logo-display">
         <span class="logo-tag">Mark only</span>
-        <div class="logo-mark-only"></div>
+        <img class="logo-mark-only" src="assets/vortexa-logo-navy.png" alt="Vortexa mark">
       </div>
     </div>
 
     <div class="logo-grid">
       <div class="logo-display dark">
         <span class="logo-tag">Inverted (uz Ink fona)</span>
-        <div class="logo-primary"><span class="logo-mark"></span>Vortexa</div>
+        <div class="logo-primary"><img class="logo-mark" src="assets/vortexa-logo-white.png" alt="Vortexa">Vortexa</div>
       </div>
       <div class="logo-display">
         <span class="logo-tag">Stacked (soctīkla profilbildei)</span>
         <div class="logo-stacked">
-          <div class="mark"></div>
+          <img class="mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
           <div class="text">Vortexa</div>
         </div>
       </div>
@@ -877,7 +876,7 @@
         <div class="clearspace-marks bottom">↓ X</div>
         <div class="clearspace-marks left">← X</div>
         <div class="clearspace-marks right">→ X</div>
-        <div class="logo-primary"><span class="logo-mark"></span>Vortexa</div>
+        <div class="logo-primary"><img class="logo-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">Vortexa</div>
       </div>
       <p style="margin-top: var(--s5); font-size: 13px; color: var(--slate); max-width: 480px; line-height: 1.55;">
         Apkārt logo vienmēr atstāj vismaz <strong style="color:var(--ink)">X = marka platums</strong> tukšumu. Minimālais izmērs: <strong style="color:var(--ink)">120px</strong> ekrānā, <strong style="color:var(--ink)">24mm</strong> drukā. Zem šī izmēra — lieto tikai marku.
@@ -892,18 +891,18 @@
         <ul>
           <li>Logo uz Paper, White vai Ink fona</li>
           <li>Marka atsevišķi, kad ir maza vieta (favicon, app ikona, profilbilde)</li>
-          <li>Inverted variants uz tumša fona (tikai melns vai Ink)</li>
-          <li>Eksportēt SVG formātā mājaslapai un visiem digitāliem materiāliem</li>
+          <li>Navy versija uz gaiša fona, White versija uz tumša fona</li>
+          <li>Eksportēt SVG formātā (kad būs vektorētā versija) mājaslapai un visiem digitāliem materiāliem</li>
         </ul>
       </div>
       <div class="rule-card bad">
         <div class="rule-card-label">Nedrīkst</div>
         <ul>
-          <li>Mainīt logo krāsu (vienmēr Navy markai, Ink tekstam)</li>
+          <li>Mainīt logo krāsu (tikai Navy vai White versijas)</li>
           <li>Pievienot ēnas, gradientus, outline, glow efektus</li>
           <li>Likt uz spilgta foto bez tumšākas overlay kārtas</li>
-          <li>Stieept, šķiebt, rotēt vai pārkārtot elementus</li>
-          <li>Lietot markas ikonu ar citu tekstu blakus</li>
+          <li>Stieept, šķiebt, rotēt vai modificēt formu</li>
+          <li>Lietot uz fona, kas konfliktē ar logo krāsu (piem., navy logo uz zila fona)</li>
         </ul>
       </div>
     </div>
@@ -1358,7 +1357,7 @@
       </div>
       <div class="web-content">
         <div class="web-nav">
-          <div class="web-nav-logo"><span class="mark"></span>Vortexa</div>
+          <div class="web-nav-logo"><img class="mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">Vortexa</div>
           <div class="web-nav-links">
             <a href="#">Produkts</a>
             <a href="#">Cenas</a>
@@ -1467,7 +1466,7 @@
           <div class="social-headline">Tavs nākamais klients <span>jau meklē tevi.</span></div>
           <div class="social-foot">
             <span class="brand">Vortexa</span>
-            <span class="mark"></span>
+            <img class="mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
           </div>
         </div>
         <div class="social-meta">
@@ -1481,7 +1480,7 @@
           <div class="social-headline">Esam pieejami arī LinkedIn — sāc <span>šodien.</span></div>
           <div class="social-foot">
             <span class="brand">Vortexa</span>
-            <span class="mark"></span>
+            <img class="mark" src="assets/vortexa-logo-white.png" alt="Vortexa">
           </div>
         </div>
         <div class="social-meta">
@@ -1495,7 +1494,7 @@
           <div class="social-headline">Auto-publicēšana <span>tagad aktīva.</span></div>
           <div class="social-foot">
             <span class="brand">Vortexa</span>
-            <span class="mark"></span>
+            <img class="mark" src="assets/vortexa-logo-white.png" alt="Vortexa">
           </div>
         </div>
         <div class="social-meta">
@@ -1515,7 +1514,7 @@
           </div>
           <div class="social-foot">
             <span class="brand">Vortexa · vortexa.lv</span>
-            <span class="mark"></span>
+            <img class="mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
           </div>
         </div>
       </div>
@@ -1528,7 +1527,7 @@
           </div>
           <div class="social-foot">
             <span class="brand">Vortexa</span>
-            <span class="mark"></span>
+            <img class="mark" src="assets/vortexa-logo-white.png" alt="Vortexa">
           </div>
         </div>
       </div>
@@ -1540,7 +1539,7 @@
           </div>
           <div class="social-foot">
             <span class="brand">vortexa.lv/beta</span>
-            <span class="mark"></span>
+            <img class="mark" src="assets/vortexa-logo-white.png" alt="Vortexa">
           </div>
         </div>
       </div>
@@ -1784,8 +1783,8 @@
 <footer>
   <div class="container">
     <div>
-      <h3><span class="footer-mark"></span>Vortexa Brand v1.0</h3>
-      <p>Atjaunots: maijs 2026 · Atbildīgais: Raivis · Komanda: Emīns</p>
+      <h3><img class="footer-mark" src="assets/vortexa-logo-white.png" alt="Vortexa">Vortexa Brand v1.0</h3>
+      <p>Atjaunots: maijs 2026 · v1.1 · Komanda: Raivis, Rainers, Emīns</p>
     </div>
     <div class="footer-meta">
       Geist + Mono · Navy palette<br>
