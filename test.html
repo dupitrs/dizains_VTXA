@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vortexa — Logo Lockup Tests</title>
+<link rel="icon" type="image/png" href="assets/vortexa-logo-navy.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0c1729;
+    --navy: #1e3a8a;
+    --paper: #f3f5f9;
+    --mist: #e2e6ee;
+    --slate: #5f6878;
+    --white: #ffffff;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #d97706;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Geist', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .header { margin-bottom: 48px; }
+  .header .eyebrow {
+    font-family: 'Geist Mono', monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--slate); margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 40px; font-weight: 500; letter-spacing: -0.03em;
+    line-height: 1.1; margin-bottom: 12px;
+  }
+  .header p { color: var(--slate); max-width: 640px; }
+
+  .legend-bar {
+    display: flex; gap: 16px; margin-top: 24px;
+    padding: 14px 18px; background: white;
+    border-radius: 8px; border: 1px solid var(--mist);
+    font-size: 12px; color: var(--slate);
+    flex-wrap: wrap;
+  }
+  .legend-bar strong { color: var(--ink); }
+  .legend-bar .v-rank {
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .rank-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+
+  .test-grid {
+    display: grid; grid-template-columns: 1fr; gap: 20px;
+  }
+
+  .test-card {
+    background: white; border-radius: 12px;
+    border: 1px solid var(--mist); overflow: hidden;
+  }
+  .test-header {
+    padding: 16px 24px; border-bottom: 1px solid var(--mist);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .test-label {
+    font-family: 'Geist Mono', monospace; font-size: 11px;
+    color: var(--slate); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .test-title {
+    font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .test-rank {
+    font-family: 'Geist Mono', monospace; font-size: 10px;
+    padding: 4px 10px; border-radius: 4px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .test-rank.good { background: rgba(22, 163, 74, 0.1); color: var(--success); }
+  .test-rank.mid { background: rgba(217, 119, 6, 0.1); color: var(--warning); }
+  .test-rank.bad { background: rgba(220, 38, 38, 0.1); color: var(--danger); }
+  .test-rank .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  .test-canvas {
+    padding: 64px 32px;
+    background: var(--paper);
+    display: flex; justify-content: center; align-items: center;
+    min-height: 200px;
+  }
+  .test-canvas.dark { background: var(--ink); }
+
+  .test-meta {
+    padding: 16px 24px; background: white;
+    border-top: 1px solid var(--mist);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .meta-block h4 {
+    font-family: 'Geist Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--slate); margin-bottom: 6px;
+  }
+  .meta-block p { font-size: 13px; color: var(--ink); line-height: 1.5; }
+
+  /* Test scale row */
+  .scale-row {
+    padding: 16px 24px; background: var(--paper);
+    border-top: 1px solid var(--mist);
+    display: flex; align-items: flex-end; gap: 32px;
+    justify-content: center;
+  }
+  .scale-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scale-item .scale-label {
+    font-family: 'Geist Mono', monospace; font-size: 9px;
+    color: var(--slate); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* ============================================================
+     LOCKUP VARIANTS
+     ============================================================ */
+
+  /* Common base */
+  .lockup {
+    display: inline-flex; align-items: center;
+    font-family: 'Geist', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .test-canvas.dark .lockup { color: var(--white); }
+
+  /* A: Logo BEFORE (baseline) */
+  .lockup-a {
+    gap: 16px;
+    font-size: 64px;
+  }
+  .lockup-a img { width: 72px; height: 72px; object-fit: contain; }
+
+  /* B: Logo AFTER */
+  .lockup-b {
+    gap: 16px;
+    font-size: 64px;
+    flex-direction: row-reverse;
+  }
+  .lockup-b img { width: 72px; height: 72px; object-fit: contain; }
+
+  /* C: Logo as period/dot at end */
+  .lockup-c {
+    gap: 8px;
+    font-size: 64px;
+    align-items: flex-end;
+  }
+  .lockup-c img {
+    width: 32px; height: 32px; object-fit: contain;
+    transform: translateY(-0.1em);
+  }
+
+  /* D: Logo replaces V */
+  .lockup-d {
+    gap: 0;
+    font-size: 64px;
+  }
+  .lockup-d img {
+    width: 56px; height: 56px; object-fit: contain;
+    margin-right: -4px;
+    transform: translateY(2px);
+  }
+
+  /* E: Logo overlap with V (behind) */
+  .lockup-e {
+    position: relative;
+    font-size: 64px;
+    padding-left: 32px;
+  }
+  .lockup-e .bg-mark {
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 90px; height: 90px;
+    object-fit: contain;
+    opacity: 0.15;
+    z-index: 1;
+  }
+  .lockup-e .text { position: relative; z-index: 2; }
+
+  /* F: Logo inside V (as accent) */
+  .lockup-f {
+    gap: 0;
+    font-size: 64px;
+    align-items: center;
+  }
+  .lockup-f .v-wrap {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+  }
+  .lockup-f .v-wrap img {
+    position: absolute;
+    top: 38%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22px; height: 22px;
+    object-fit: contain;
+    z-index: 2;
+  }
+  .lockup-f .v-wrap span { position: relative; z-index: 1; }
+
+  /* G: Wordmark only (no mark) */
+  .lockup-g {
+    font-size: 64px;
+  }
+  .lockup-g .accent { color: var(--navy); }
+
+  /* H: Stacked centered */
+  .lockup-h {
+    flex-direction: column;
+    gap: 12px;
+    font-size: 36px;
+    align-items: center;
+  }
+  .lockup-h img { width: 56px; height: 56px; object-fit: contain; }
+
+  /* Inverted versions */
+  .test-canvas.dark .lockup img { filter: brightness(0) invert(1); }
+
+  /* Smaller scale demos */
+  .scale-large { font-size: 32px; }
+  .scale-large img { width: 36px; height: 36px; }
+  .scale-large.lockup-c img { width: 16px; height: 16px; }
+  .scale-large.lockup-d img { width: 28px; height: 28px; }
+  .scale-large.lockup-h img { width: 28px; height: 28px; }
+  .scale-large.lockup-h { font-size: 20px; gap: 8px; }
+  .scale-large.lockup-f .v-wrap { width: 20px; }
+  .scale-large.lockup-f .v-wrap img { width: 11px; height: 11px; }
+  .scale-large.lockup-e { padding-left: 18px; }
+  .scale-large.lockup-e .bg-mark { width: 46px; height: 46px; }
+
+  .scale-med { font-size: 18px; }
+  .scale-med img { width: 22px; height: 22px; }
+  .scale-med.lockup-c img { width: 9px; height: 9px; }
+  .scale-med.lockup-d img { width: 16px; height: 16px; }
+  .scale-med.lockup-h img { width: 18px; height: 18px; }
+  .scale-med.lockup-h { font-size: 12px; gap: 4px; }
+  .scale-med.lockup-f .v-wrap { width: 11px; }
+  .scale-med.lockup-f .v-wrap img { width: 6px; height: 6px; }
+  .scale-med.lockup-e { padding-left: 12px; }
+  .scale-med.lockup-e .bg-mark { width: 28px; height: 28px; }
+
+  .scale-small { font-size: 14px; }
+  .scale-small img { width: 16px; height: 16px; }
+  .scale-small.lockup-c img { width: 7px; height: 7px; }
+  .scale-small.lockup-d img { width: 12px; height: 12px; }
+  .scale-small.lockup-h img { width: 14px; height: 14px; }
+  .scale-small.lockup-h { font-size: 10px; gap: 3px; }
+  .scale-small.lockup-f .v-wrap { width: 9px; }
+  .scale-small.lockup-f .v-wrap img { width: 5px; height: 5px; }
+  .scale-small.lockup-e { padding-left: 10px; }
+  .scale-small.lockup-e .bg-mark { width: 22px; height: 22px; }
+
+  /* Verdict section */
+  .verdict {
+    margin-top: 60px;
+    background: var(--ink); color: white;
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .verdict h2 {
+    font-size: 24px; font-weight: 500; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .verdict .verdict-sub {
+    color: rgba(255,255,255,0.6); font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .verdict-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  }
+  .verdict-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px; padding: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .verdict-card.winner {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .verdict-rank {
+    font-family: 'Geist Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6); margin-bottom: 8px;
+  }
+  .verdict-card.winner .verdict-rank { color: rgba(255,255,255,0.9); }
+  .verdict-title {
+    font-size: 16px; font-weight: 600; margin-bottom: 6px;
+  }
+  .verdict-desc { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+  @media (max-width: 800px) {
+    .test-meta, .verdict-grid { grid-template-columns: 1fr; }
+    .scale-row { flex-direction: column; align-items: center; }
+    .lockup-a, .lockup-b, .lockup-c, .lockup-d, .lockup-e, .lockup-f, .lockup-g { font-size: 40px; }
+    .lockup-a img, .lockup-b img { width: 48px; height: 48px; }
+    .lockup-d img { width: 36px; height: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="eyebrow">Logo Lockup Tests · v1</div>
+    <h1>Astoņi varianti, kā salikt logo + "Vortexa".</h1>
+    <p>Visi rāda to pašu zīmolu, bet ar atšķirīgu attiecību starp marku un wordmark. Katram variantam — 3 izmēri (large/medium/small) + tumšā fona variants, lai redzētu, kā strādā telefonā un favicon izmērā.</p>
+
+    <div class="legend-bar">
+      <span class="v-rank"><span class="rank-dot" style="background:var(--success)"></span><strong>Strādā labi</strong></span>
+      <span class="v-rank"><span class="rank-dot" style="background:var(--warning)"></span><strong>Strādā, bet ar trūkumiem</strong></span>
+      <span class="v-rank"><span class="rank-dot" style="background:var(--danger)"></span><strong>Nedarbojas</strong></span>
+    </div>
+  </div>
+
+  <div class="test-grid">
+
+    <!-- ============ A: Logo BEFORE (baseline) ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants A — esošais</div>
+          <div class="test-title">Logo pirms vārda</div>
+        </div>
+        <span class="test-rank good"><span class="dot"></span>STRĀDĀ LABI</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-a">
+          <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          <span>Vortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-a">
+          <img src="assets/vortexa-logo-white.png" alt="Vortexa">
+          <span>Vortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-a scale-large">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-a scale-med">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-a scale-small">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Plus</h4>
+          <p>Standarta konvencija — cilvēks redz logo, tad nosaukumu. Asimetriskais balanss strādā jebkurā izmērā. Marka skaitās "iconic", kad lieto atsevišķi.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Mīnus</h4>
+          <p>Predictable, līdzīgs simtiem citu SaaS. Nav īpaši atmiņā paliekošs. Logo un teksts jūtas kā divas atsevišķas lietas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ B: Logo AFTER (Raivis idea) ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants B — tava ideja #1</div>
+          <div class="test-title">Logo pēc vārda</div>
+        </div>
+        <span class="test-rank good"><span class="dot"></span>STRĀDĀ LABI</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-b">
+          <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          <span>Vortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-b">
+          <img src="assets/vortexa-logo-white.png" alt="Vortexa">
+          <span>Vortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-b scale-large">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-b scale-med">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-b scale-small">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Plus</h4>
+          <p>Asimetrisks, mazliet "playful" nekā standartais. Marka kļūst par "punctuation" — vortex izlec kā nobeigums. Tehniski-mehāniski jutīgs: telefonā nav redzams, kāpēc tas tur.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Mīnus</h4>
+          <p>Acs vispirms iziet pa "Vortexa" un tikai tad pamana marku — marka kļūst sekundāra. Soctīklu profilbildē šis nestrādās (vajadzēs marku atsevišķi).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ C: Logo as period/dot ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants C — mana ideja</div>
+          <div class="test-title">Logo kā "punkts" beigās</div>
+        </div>
+        <span class="test-rank good"><span class="dot"></span>STRĀDĀ LABI</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-c">
+          <span>Vortexa</span>
+          <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-c">
+          <span>Vortexa</span>
+          <img src="assets/vortexa-logo-white.png" alt="Vortexa">
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-c scale-large">
+            <span>Vortexa</span>
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-c scale-med">
+            <span>Vortexa</span>
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-c scale-small">
+            <span>Vortexa</span>
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Plus</h4>
+          <p>Modernais Linear/Stripe/Notion stils — marka ir mazs accent, ne dominējošs elements. Atstāj fokusu uz "Vortexa" nosaukumu, kas svarīgāk brand recognition. Strādā jebkurā izmērā.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Mīnus</h4>
+          <p>Marka kļūst mazsvarīga — ja kāds redz tikai marku atsevišķi (favicon, profil bilde), nav jūtu, ka tā ir "Vortexa". Vajag stipru marku, kas pati strādā.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ D: Logo replaces V ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants D — tava ideja #3</div>
+          <div class="test-title">Logo aizvieto V burtu</div>
+        </div>
+        <span class="test-rank bad"><span class="dot"></span>NEDARBOJAS</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-d">
+          <img src="assets/vortexa-logo-navy.png" alt="V">
+          <span>ortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-d">
+          <img src="assets/vortexa-logo-white.png" alt="V">
+          <span>ortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-d scale-large">
+            <img src="assets/vortexa-logo-navy.png" alt="V">
+            <span>ortexa</span>
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-d scale-med">
+            <img src="assets/vortexa-logo-navy.png" alt="V">
+            <span>ortexa</span>
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-d scale-small">
+            <img src="assets/vortexa-logo-navy.png" alt="V">
+            <span>ortexa</span>
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Problēma</h4>
+          <p>Vortex spirāle nav V formā — tā ir vertikāla un izliekta. Acs nelasa to kā "V", bet kā "kaut kāds attēls + ortexa". Cilvēks redz "Ortexa", ne "Vortexa". Lasāmība cieš.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Kad šī tehnika strādā</h4>
+          <p>Letter-substitution strādā, ja logo SHAPE atbilst burtam. Piem., Amazon arrow zem teksta nav burts — tas ir akcents. FedEx slēpj bultiņu E un x starpā. Tavs vortex nav V.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ E: Logo overlap behind ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants E — mana ideja</div>
+          <div class="test-title">Logo overlap aiz teksta</div>
+        </div>
+        <span class="test-rank mid"><span class="dot"></span>STRĀDĀ AR TRŪKUMIEM</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-e">
+          <img class="bg-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          <span class="text">Vortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-e">
+          <img class="bg-mark" src="assets/vortexa-logo-white.png" alt="Vortexa">
+          <span class="text">Vortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-e scale-large">
+            <img class="bg-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span class="text">Vortexa</span>
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-e scale-med">
+            <img class="bg-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span class="text">Vortexa</span>
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-e scale-small">
+            <img class="bg-mark" src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span class="text">Vortexa</span>
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Plus</h4>
+          <p>Vizuāli interesants — marka un teksts saplūst vienā kompozīcijā. Editorial sajūta, atšķirīgs no tipiskiem SaaS.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Mīnus</h4>
+          <p>Telefonā un favicon nestrādās — overlap kļūst par troksni. Vajadzīga atsevišķa "small size" versija. Tehniski sarežģīti uzturēt konsekvenci.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ F: Logo inside V ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants F — tava ideja #2</div>
+          <div class="test-title">Logo iekšā V burtā</div>
+        </div>
+        <span class="test-rank bad"><span class="dot"></span>NEDARBOJAS</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-f">
+          <div class="v-wrap">
+            <span>V</span>
+            <img src="assets/vortexa-logo-navy.png" alt="">
+          </div>
+          <span>ortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-f">
+          <div class="v-wrap">
+            <span>V</span>
+            <img src="assets/vortexa-logo-white.png" alt="">
+          </div>
+          <span>ortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-f scale-large">
+            <div class="v-wrap">
+              <span>V</span>
+              <img src="assets/vortexa-logo-navy.png" alt="">
+            </div>
+            <span>ortexa</span>
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-f scale-med">
+            <div class="v-wrap">
+              <span>V</span>
+              <img src="assets/vortexa-logo-navy.png" alt="">
+            </div>
+            <span>ortexa</span>
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-f scale-small">
+            <div class="v-wrap">
+              <span>V</span>
+              <img src="assets/vortexa-logo-navy.png" alt="">
+            </div>
+            <span>ortexa</span>
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Problēma</h4>
+          <p>V negative space ir trijstūrveida, vortex ir oval. Logo neiederas, un mēģinājums to ielikt rada vizuālu konfliktu. Mazos izmēros vortex pārvēršas par melnu plankumu V vidū.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Kad šī tehnika strādā</h4>
+          <p>Strādā, ja logo IR daļa no burta dizaina (custom letterform). Šeit V ir Geist standartais burts un vortex ir atsevišķs attēls — divas atšķirīgas sistēmas, kas necieš kopā.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ G: Wordmark only ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants G — mana ideja</div>
+          <div class="test-title">Tikai wordmark (bez markas)</div>
+        </div>
+        <span class="test-rank mid"><span class="dot"></span>STRĀDĀ AR TRŪKUMIEM</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-g">
+          <span class="accent">V</span><span>ortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-g">
+          <span class="accent" style="color:#7c9eff">V</span><span>ortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-g scale-large">
+            <span class="accent">V</span><span>ortexa</span>
+          </div>
+          <div class="scale-label">Header</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-g scale-med">
+            <span class="accent">V</span><span>ortexa</span>
+          </div>
+          <div class="scale-label">Nav</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-g scale-small">
+            <span class="accent">V</span><span>ortexa</span>
+          </div>
+          <div class="scale-label">Footer</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Plus</h4>
+          <p>Skandināvu disciplīna — atstrādā ar to, kas ir. Strādā jebkurā izmērā. Profesionāls. Mailchimp, Stripe, Vercel sākotnēji izmantoja tikai wordmark.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Mīnus</h4>
+          <p>Tu jau esi uzbūvējis logo. Ja izlietosi šo, marka kļūst lieka. Tomēr vērts, ja marka nestrādā mazos izmēros (favicon, app ikona). Var lietot wordmark + atsevišķu marku citur.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ H: Stacked centered ============ -->
+    <div class="test-card">
+      <div class="test-header">
+        <div>
+          <div class="test-label">Variants H — alternatīva</div>
+          <div class="test-title">Stacked (vertikāli centrēts)</div>
+        </div>
+        <span class="test-rank mid"><span class="dot"></span>SPECIĀLAM LIETOJUMAM</span>
+      </div>
+      <div class="test-canvas">
+        <div class="lockup lockup-h">
+          <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+          <span>Vortexa</span>
+        </div>
+      </div>
+      <div class="test-canvas dark">
+        <div class="lockup lockup-h">
+          <img src="assets/vortexa-logo-white.png" alt="Vortexa">
+          <span>Vortexa</span>
+        </div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-item">
+          <div class="lockup lockup-h scale-large">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Hero</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-h scale-med">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Card</div>
+        </div>
+        <div class="scale-item">
+          <div class="lockup lockup-h scale-small">
+            <img src="assets/vortexa-logo-navy.png" alt="Vortexa">
+            <span>Vortexa</span>
+          </div>
+          <div class="scale-label">Badge</div>
+        </div>
+      </div>
+      <div class="test-meta">
+        <div class="meta-block">
+          <h4>Kad lietot</h4>
+          <p>Soctīkla profilbildei, app ikonai, vizītkartes priekšpusei, piedāvājuma karšu centrētiem layoutiem. NE galvenajā mājaslapas header.</p>
+        </div>
+        <div class="meta-block">
+          <h4>Kāpēc ne galvenais</h4>
+          <p>Vertikāls lockup aizņem daudz vietas augšā. Header parasti vajag horizontālu, lai būtu vieta naviem. Šis dzīvo blakus galvenajam, kā sekundārs variants.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       VERDICT
+       ============================================================ -->
+  <div class="verdict">
+    <h2>Mans verdikts</h2>
+    <p class="verdict-sub">No 8 variantiem — kuri tiešām strādā un kuri jāatmet.</p>
+
+    <div class="verdict-grid">
+      <div class="verdict-card winner">
+        <div class="verdict-rank">★ Mans ieteikums</div>
+        <div class="verdict-title">A vai C — primary; H — soctīklam</div>
+        <div class="verdict-desc">A (logo pirms) un C (logo kā punkts) ir labākie galvenajam lockup. Tad H (stacked) atsevišķi soctīkla profilbildei un favicon. Tas ir tas, ko dara visas profesionālās brand sistēmas — 2–3 varianti dažādiem kontekstiem.</div>
+      </div>
+
+      <div class="verdict-card">
+        <div class="verdict-rank">Tavs B variants</div>
+        <div class="verdict-title">Strādā, bet nav pārāks par A</div>
+        <div class="verdict-desc">Logo pēc vārda ir leģitīma izvēle, bet nedod papildu vērtību pret A. Tas reverso konvenciju bez skaidra ieguvuma. Ja tev tas patīk personiskā līmenī — ej ar to. Citādi paliek pie A.</div>
+      </div>
+
+      <div class="verdict-card">
+        <div class="verdict-rank">Tavas D un F idejas</div>
+        <div class="verdict-title">Atmest</div>
+        <div class="verdict-desc">D (V aizvietošana) salauž lasāmību, jo vortex nav V formā. F (iekšā V) rada vizuālu konfliktu mazos izmēros. Abas radīs problēmas tehniskā izpildē — netaisīsim.</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6;">
+      <strong style="color: white;">Reālā atbilde uz tavu jautājumu par balansu:</strong> ja A jūtas "out of balance", problēma nav variantā — problēma ir gap (atstarpe) starp logo un tekstu. Atstarpes maiņa no 16px uz 12px vai 20px var izšķirt vizuālo balansu vairāk nekā lockup orientācijas maiņa. Pamēģini A variantu ar dažādām atstarpēm — tas var atrisināt visu bez konceptuālas izmaiņas.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
